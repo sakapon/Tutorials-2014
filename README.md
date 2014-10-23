@@ -1,4 +1,3 @@
-Tutorials-2014
-==============
+## Tutorials 2014
 
 The samples for tutorial.

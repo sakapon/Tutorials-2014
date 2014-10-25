@@ -25,7 +25,7 @@ namespace AirCanvas
     {
         const int ScreenWidth = 1920;
         const int ScreenHeight = 1080;
-        const int MappingRate = 3;
+        const int MappingScale = 3;
 
         Controller controller;
         FrameListener listener;
@@ -90,7 +90,7 @@ namespace AirCanvas
 
         static StylusPoint ToStylusPoint(Leap.Vector v)
         {
-            return new StylusPoint(ScreenWidth / 2 + MappingRate * v.x, ScreenHeight - MappingRate * v.y);
+            return new StylusPoint(ScreenWidth / 2 + MappingScale * v.x, ScreenHeight - MappingScale * v.y);
         }
     }
 }

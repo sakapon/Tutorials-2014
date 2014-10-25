@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirCanvas", "AirCanvas\AirCanvas.csproj", "{5A09730D-DDA0-49F6-8C8C-26207FDD6264}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirCanvas2", "AirCanvas2\AirCanvas2.csproj", "{0FB899D3-F9F6-4686-9FA3-D0EA82BA6A3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5A09730D-DDA0-49F6-8C8C-26207FDD6264}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A09730D-DDA0-49F6-8C8C-26207FDD6264}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A09730D-DDA0-49F6-8C8C-26207FDD6264}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FB899D3-F9F6-4686-9FA3-D0EA82BA6A3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB899D3-F9F6-4686-9FA3-D0EA82BA6A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB899D3-F9F6-4686-9FA3-D0EA82BA6A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB899D3-F9F6-4686-9FA3-D0EA82BA6A3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

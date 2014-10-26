@@ -16,6 +16,12 @@ namespace FingersTracker
         Controller controller;
         FrameListener listener;
 
+        public double FrameRate
+        {
+            get { return GetValue<double>(); }
+            private set { SetValue(value); }
+        }
+
         public Point3D[] Positions
         {
             get { return GetValue<Point3D[]>(); }
@@ -42,6 +48,7 @@ namespace FingersTracker
 
         void listener_FrameArrived(Leap.Frame frame)
         {
+            FrameRate = frame.CurrentFramesPerSecond;
             Positions = frame.Pointables
                 .Where(p => p.IsValid)
                 .Where(p => p.StabilizedTipPosition.IsValid())

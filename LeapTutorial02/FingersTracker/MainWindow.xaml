@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FingersTracker"
 		x:Class="FingersTracker.MainWindow"
-        Title="Fingers Tracker" Height="350" Width="525" WindowState="Maximized">
+        Title="Fingers Tracker" Height="350" Width="525" WindowState="Maximized" FontSize="32">
 	<Window.Resources>
 		<DataTemplate x:Key="PositionDataTemplate">
-			<Ellipse Fill="#FFFF9933" Height="30" Width="30" Margin="-15,-15,0,0" RenderTransformOrigin="0.5,0.5">
+			<Ellipse Fill="#FFFF9900" Height="30" Width="30" Margin="-15,-15,0,0" RenderTransformOrigin="0.5,0.5">
 				<Ellipse.RenderTransform>
 					<TransformGroup>
 						<ScaleTransform/>
@@ -25,6 +25,7 @@
 		<local:AppModel/>
 	</Window.DataContext>
 	<Grid>
+		<TextBlock HorizontalAlignment="Left" Text="{Binding FrameRate, Mode=OneWay, StringFormat=\{0:N2\} f/s}" VerticalAlignment="Top" Margin="20,20,0,0"/>
 		<ItemsControl ItemsSource="{Binding Positions}" ItemTemplate="{DynamicResource PositionDataTemplate}" ItemsPanel="{DynamicResource PositionsPanelTemplate}"/>
 	</Grid>
 </Window>

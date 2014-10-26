@@ -45,7 +45,8 @@ namespace AirCanvas
             listener = new FrameListener();
             controller.AddListener(listener);
 
-            listener.FrameArrived += listener_FrameArrived;
+            // 非 UI スレッドでイベントが発生するため、UI スレッドに切り替えます。
+            listener.FrameArrived += f => Dispatcher.Invoke(() => listener_FrameArrived(f));
         }
 
         void MainWindow_Closing(object sender, CancelEventArgs e)
@@ -63,29 +64,26 @@ namespace AirCanvas
                 .Where(p => p.StabilizedTipPosition.z < 0)
                 .ToDictionary(p => p.Id, p => ToStylusPoint(p.StabilizedTipPosition));
 
-            Dispatcher.InvokeAsync(() =>
+            var idsToRemove = strokes.Keys.Except(positions.Keys).ToArray();
+            foreach (var id in idsToRemove)
             {
-                var idsToRemove = strokes.Keys.Except(positions.Keys).ToArray();
-                foreach (var id in idsToRemove)
-                {
-                    strokes.Remove(id);
-                }
+                strokes.Remove(id);
+            }
 
-                foreach (var item in positions)
+            foreach (var item in positions)
+            {
+                if (strokes.ContainsKey(item.Key))
                 {
-                    if (strokes.ContainsKey(item.Key))
-                    {
-                        strokes[item.Key].StylusPoints.Add(item.Value);
-                    }
-                    else
-                    {
-                        var stroke = new Stroke(new StylusPointCollection(new[] { item.Value }));
-                        strokes[item.Key] = stroke;
-
-                        TheCanvas.Strokes.Add(stroke);
-                    }
+                    strokes[item.Key].StylusPoints.Add(item.Value);
                 }
-            });
+                else
+                {
+                    var stroke = new Stroke(new StylusPointCollection(new[] { item.Value }));
+                    strokes[item.Key] = stroke;
+
+                    TheCanvas.Strokes.Add(stroke);
+                }
+            }
         }
 
         static StylusPoint ToStylusPoint(Leap.Vector v)

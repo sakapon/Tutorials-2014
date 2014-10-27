@@ -52,11 +52,11 @@ namespace FingersTracker
             Positions = frame.Pointables
                 .Where(p => p.IsValid)
                 .Where(p => p.StabilizedTipPosition.IsValid())
-                .Select(p => ToStylusPoint(p.StabilizedTipPosition))
+                .Select(p => ToScreenPoint(p.StabilizedTipPosition))
                 .ToArray();
         }
 
-        static Point3D ToStylusPoint(Leap.Vector v)
+        static Point3D ToScreenPoint(Leap.Vector v)
         {
             return new Point3D(ScreenWidth / 2 + MappingScale * v.x, ScreenHeight - MappingScale * v.y, MappingScale * v.z);
         }

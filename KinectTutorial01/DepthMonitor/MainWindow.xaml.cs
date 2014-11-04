@@ -1,6 +1,7 @@
 ﻿using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +46,7 @@ namespace DepthMonitor
 
             sensor = KinectSensor.KinectSensors[0];
             sensor.DepthFrameReady += sensor_DepthFrameReady;
-            sensor.DepthStream.Enable(DepthImageFormat.Resolution640x480Fps30);
+            sensor.DepthStream.Enable(DepthImageFormat.Resolution320x240Fps30);
 
             depthData = new DepthImagePixel[sensor.DepthStream.FramePixelDataLength];
             bitmapData = new byte[4 * sensor.DepthStream.FramePixelDataLength];
@@ -57,7 +58,7 @@ namespace DepthMonitor
             sensor.Start();
         }
 
-        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        void MainWindow_Closing(object sender, CancelEventArgs e)
         {
             if (sensor != null)
             {

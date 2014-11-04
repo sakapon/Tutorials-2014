@@ -2,6 +2,11 @@
 
 The samples for tutorial.
 
+### KinectTutorial01 (Depth Monitor)
+See [document](https://github.com/sakapon/Tutorials-2014/wiki/KinectTutorial01).
+
+![Depth Monitor](Images/Kinect-01-DepthMonitor.png)
+
 ### LeapTutorial01 (Air Canvas)
 See [document](https://github.com/sakapon/Tutorials-2014/wiki/LeapTutorial01).
 

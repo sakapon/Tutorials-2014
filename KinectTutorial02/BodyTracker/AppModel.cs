@@ -11,7 +11,7 @@ namespace BodyTracker
     {
         const int ScreenWidth = 1920;
         const int ScreenHeight = 1080;
-        const int MappingScale = 3000;
+        const int MappingScale = 1000;
 
         KinectSensor sensor;
         Skeleton[] skeletons;
@@ -28,8 +28,8 @@ namespace BodyTracker
 
             sensor = KinectSensor.KinectSensors[0];
             sensor.SkeletonFrameReady += sensor_SkeletonFrameReady;
-            sensor.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
             sensor.SkeletonStream.Enable();
+            // Smoothing
             //sensor.SkeletonStream.Enable(new TransformSmoothParameters
             //{
             //    Correction = 0.5f,
@@ -81,7 +81,7 @@ namespace BodyTracker
 
         static Point3D ToScreenPoint(SkeletonPoint p)
         {
-            return new Point3D(ScreenWidth / 2 + MappingScale * p.X, ScreenHeight - MappingScale * p.Y, MappingScale * p.Z);
+            return new Point3D(ScreenWidth / 2 + MappingScale * p.X, ScreenHeight / 2 - MappingScale * p.Y, MappingScale * p.Z);
         }
     }
 }

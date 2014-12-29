@@ -45,8 +45,7 @@ namespace AirCanvas
             listener = new FrameListener();
             controller.AddListener(listener);
 
-            // 非 UI スレッドでイベントが発生するため、UI スレッドに切り替えます。
-            listener.FrameArrived += f => Dispatcher.Invoke(() => listener_FrameArrived(f));
+            listener.FrameArrived += listener_FrameArrived;
         }
 
         void MainWindow_Closing(object sender, CancelEventArgs e)
@@ -64,6 +63,12 @@ namespace AirCanvas
                 .Where(p => p.StabilizedTipPosition.z < 0)
                 .ToDictionary(p => p.Id, p => ToStylusPoint(p.StabilizedTipPosition));
 
+            // 非 UI スレッドから UI スレッドに切り替えます。
+            Dispatcher.InvokeAsync(() => ShowStrokes(positions));
+        }
+
+        void ShowStrokes(Dictionary<int, StylusPoint> positions)
+        {
             var idsToRemove = strokes.Keys.Except(positions.Keys).ToArray();
             foreach (var id in idsToRemove)
             {

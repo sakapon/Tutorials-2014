@@ -35,12 +35,25 @@ namespace AirCanvas
         {
             InitializeComponent();
 
+            Loaded += MainWindow_Loaded;
+            Closing += MainWindow_Closing;
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
             controller = new Controller();
             listener = new FrameListener();
             controller.AddListener(listener);
 
             // 非 UI スレッドでイベントが発生するため、UI スレッドに切り替えます。
             listener.FrameArrived += f => Dispatcher.Invoke(() => listener_FrameArrived(f));
+        }
+
+        void MainWindow_Closing(object sender, CancelEventArgs e)
+        {
+            controller.RemoveListener(listener);
+            listener.Dispose();
+            controller.Dispose();
         }
 
         void listener_FrameArrived(Leap.Frame frame)
